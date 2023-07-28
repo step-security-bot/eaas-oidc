@@ -1,0 +1,3 @@
+[submodule "eaas-shared"]
+	path = eaas-shared
+	url = https://github.com/autosec-network/eaas-shared.git
