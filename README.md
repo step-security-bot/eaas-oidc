@@ -1,6 +1,6 @@
 # eaas-oidc
 
-## GA Wrangler API Token Minimum Requirements
+## `CF_WRANGLER_API_TOKEN` Minimum Requirements
 
 |         |                    |      |
 | ------- | ------------------ | ---- |
