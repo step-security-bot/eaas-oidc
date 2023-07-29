@@ -26,6 +26,11 @@ FETCH_MAX_REDIRECTS = "0"
 # End users hit this endpoint - it should be close to them
 mode = "off"
 
+[dev]
+local_protocol = "https"
+ip = "localhost"
+port = 8787
+
 [env.dev]
 name = "oidc-provider-dev"
 main = "src/index.ts"
