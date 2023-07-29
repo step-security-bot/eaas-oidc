@@ -1,0 +1,99 @@
+name = "oidc-provider-canary"
+main = "src/index.ts"
+compatibility_date = "2023-07-24"
+compatibility_flags = [
+	"nodejs_compat",
+	"strict_compression_checks",
+	"strict_crypto_checks",
+]
+workers_dev = false
+# route = { pattern = "canary.provider.oidc.cipher.autosec.network", custom_domain = true }
+# ChainFuse is allowing us to use their enterprise CF account for free during dev
+route = { pattern = "canary.provider.oidc.cipher.chainfuse.com", custom_domain = true }
+usage_model = "bundled"
+minify = true
+tsconfig = "../tsconfig.json"
+
+[vars]
+ENVIRONMENT = "canary"
+NODE_ENV = "development"
+LOGGING = "1"
+FETCH_DISK_CACHE_AGE = "300"
+FETCH_DOH_SERVER = "https://cseq6ixxqe.cloudflare-gateway.com/dns-query"
+FETCH_MAX_REDIRECTS = "0"
+
+[placement]
+# End users hit this endpoint - it should be close to them
+mode = "off"
+
+[env.dev]
+name = "oidc-provider-dev"
+main = "src/index.ts"
+compatibility_date = "2023-07-24"
+compatibility_flags = [
+	"nodejs_compat",
+	"strict_compression_checks",
+	"strict_crypto_checks",
+]
+workers_dev = false
+# route = { pattern = "dev.provider.oidc.cipher.autosec.network", custom_domain = true }
+route = { pattern = "dev.provider.oidc.cipher.chainfuse.com", custom_domain = true }
+usage_model = "bundled"
+minify = true
+tsconfig = "../tsconfig.json"
+
+[env.dev.vars]
+ENVIRONMENT = "dev"
+NODE_ENV = "development"
+LOGGING = "2"
+FETCH_DISK_CACHE_AGE = "300"
+FETCH_DOH_SERVER = "https://cseq6ixxqe.cloudflare-gateway.com/dns-query"
+FETCH_MAX_REDIRECTS = "0"
+
+[env.staging]
+name = "oidc-provider-staging"
+main = "src/index.ts"
+compatibility_date = "2023-07-24"
+compatibility_flags = [
+	"nodejs_compat",
+	"strict_compression_checks",
+	"strict_crypto_checks",
+]
+workers_dev = false
+# route = { pattern = "staging.provider.oidc.cipher.autosec.network", custom_domain = true }
+route = { pattern = "staging.provider.oidc.cipher.chainfuse.com", custom_domain = true }
+usage_model = "bundled"
+minify = true
+tsconfig = "../tsconfig.json"
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+NODE_ENV = "production"
+LOGGING = "3"
+FETCH_DISK_CACHE_AGE = "300"
+FETCH_DOH_SERVER = "https://osnhy0qy7c.cloudflare-gateway.com/dns-query"
+FETCH_MAX_REDIRECTS = "0"
+
+[env.production]
+name = "oidc-provider"
+main = "src/index.ts"
+compatibility_date = "2023-07-24"
+compatibility_flags = [
+	"nodejs_compat",
+	"strict_compression_checks",
+	"strict_crypto_checks",
+]
+workers_dev = false
+# route = { pattern = "provider.oidc.cipher.autosec.network", custom_domain = true }
+route = { pattern = "provider.oidc.cipher.chainfuse.com", custom_domain = true }
+usage_model = "bundled"
+minify = true
+tsconfig = "../tsconfig.json"
+
+[env.production.vars]
+ENVIRONMENT = "production"
+NODE_ENV = "production"
+LOGGING = "4"
+FETCH_DISK_CACHE_AGE = "300"
+FETCH_DOH_SERVER = "https://osnhy0qy7c.cloudflare-gateway.com/dns-query"
+FETCH_MAX_REDIRECTS = "0"
