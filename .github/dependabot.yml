@@ -47,3 +47,21 @@ updates:
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-patch']
+  - package-ecosystem: 'npm'
+    directory: '/oidc-provider'
+    schedule:
+      interval: 'daily'
+    open-pull-requests-limit: 999
+    target-branch: 'staging'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'npm'
+    directory: '/oidc-provider'
+    schedule:
+      interval: 'daily'
+    open-pull-requests-limit: 999
+    target-branch: 'dev'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-patch']
