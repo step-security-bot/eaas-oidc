@@ -9,7 +9,7 @@ compatibility_flags = [
 workers_dev = false
 # route = { pattern = "canary.provider.oidc.cipher.autosec.network", custom_domain = true }
 # ChainFuse is allowing us to use their enterprise CF account for free during dev
-route = { pattern = "canary.provider.oidc.cipher.chainfuse.com", custom_domain = true }
+route = { pattern = "canary.provider.oidc.cipher.chainfuse.ai", custom_domain = true }
 usage_model = "bundled"
 minify = true
 tsconfig = "../tsconfig.json"
@@ -42,7 +42,7 @@ compatibility_flags = [
 ]
 workers_dev = false
 # route = { pattern = "dev.provider.oidc.cipher.autosec.network", custom_domain = true }
-route = { pattern = "dev.provider.oidc.cipher.chainfuse.com", custom_domain = true }
+route = { pattern = "dev.provider.oidc.cipher.chainfuse.ai", custom_domain = true }
 usage_model = "bundled"
 minify = true
 tsconfig = "../tsconfig.json"
@@ -66,7 +66,7 @@ compatibility_flags = [
 ]
 workers_dev = false
 # route = { pattern = "staging.provider.oidc.cipher.autosec.network", custom_domain = true }
-route = { pattern = "staging.provider.oidc.cipher.chainfuse.com", custom_domain = true }
+route = { pattern = "staging.provider.oidc.cipher.chainfuse.ai", custom_domain = true }
 usage_model = "bundled"
 minify = true
 tsconfig = "../tsconfig.json"
@@ -90,7 +90,7 @@ compatibility_flags = [
 ]
 workers_dev = false
 # route = { pattern = "provider.oidc.cipher.autosec.network", custom_domain = true }
-route = { pattern = "provider.oidc.cipher.chainfuse.com", custom_domain = true }
+route = { pattern = "provider.oidc.cipher.chainfuse.ai", custom_domain = true }
 usage_model = "bundled"
 minify = true
 tsconfig = "../tsconfig.json"
