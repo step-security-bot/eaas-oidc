@@ -1,0 +1,60 @@
+name: Update `workerd` runtime
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - '**/package.json'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  update-toml:
+    if: startsWith(github.event.pull_request.head.ref, 'dependabot/npm_and_yarn/development/workerd') && github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: step-security/harden-runner@v2.5.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+          disable-sudo: true
+      - uses: actions/checkout@v3.5.3
+        with:
+          ref: ${{ github.head_ref }}
+          submodules: true
+      - uses: actions/setup-node@v3.7.0
+        with:
+          node-version: lts/*
+          check-latest: true
+          cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            eaas-shared/package-lock.json
+      - run: npm ci
+      # No need to run `npm ci` in submodule
+      - name: Get minor version of workerd
+        id: get-version
+        run: |
+          VERSION=$(npm show workerd version)
+          MINOR_VERSION=${VERSION#*.}
+          MINOR_VERSION_HYPHEN="${MINOR_VERSION:0:4}-${MINOR_VERSION:4:2}-${MINOR_VERSION:6:2}"
+          echo "minor-version-hyphen=$MINOR_VERSION_HYPHEN" >> $GITHUB_OUTPUT
+      - name: Update `compatibility_date` for canary branch
+        if: github.base_ref == 'canary'
+        run: sed -i "0,/compatibility_date = .*/s//compatibility_date = \"${{ steps.get-version.outputs.minor-version-hyphen }}\"/" wrangler.toml
+      - name: Update `compatibility_date` for non-canary branches
+        if: github.base_ref != 'canary'
+        run: sed -i "/\[env.${{ github.base_ref }}\]/,/compatibility_date = .*/{//!b; s/compatibility_date = .*/compatibility_date = \"${{ steps.get-version.outputs.minor-version-hyphen }}\"/}" wrangler.toml
+      - name: Git Setup
+        run: |
+          git config user.name "dependabot[bot]"
+          git config user.email "dependabot[bot]@users.noreply.github.com"
+      - run: git commit wrangler.toml -m "Update `compatibility_date` in wrangler.toml file"
+      - run: git push
