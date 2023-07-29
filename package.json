@@ -1,0 +1,25 @@
+{
+	"type": "module",
+	"scripts": {
+		"prettier": "prettier --check .",
+		"prettier:fix": "prettier --write ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/autosec-network/eaas-oidc.git"
+	},
+	"author": "Autosec",
+	"contributors": [
+		"DemosJarco"
+	],
+	"license": "AGPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/autosec-network/eaas-oidc/issues"
+	},
+	"homepage": "https://github.com/autosec-network/eaas-oidc#readme",
+	"prettier": "@demosjarco/prettier-config",
+	"devDependencies": {
+		"@demosjarco/prettier-config": "^1.0.0",
+		"wrangler": "^3.4.0"
+	}
+}
