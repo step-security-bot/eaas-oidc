@@ -1,0 +1,74 @@
+name: Publish | oidc-provider
+run-name: Publish | oidc-provider | ${{ inputs.environment || github.ref_name }}
+
+on:
+  push:
+    branches:
+      - production
+      - staging
+      - dev
+      - canary
+    paths:
+      - '.github/workflows/publish-oidc-provider.yml'
+      - 'package-lock.json'
+      - 'eaas-shared/**'
+      - 'shared/**'
+      - 'oidc-provider/**'
+      - '!oidc-provider/INSTRUCTIONS.md'
+      - '!oidc-provider/README.md'
+      - '!oidc-provider/.dev.vars.example'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose an environment to deploy to:'
+        required: true
+        default: 'canary'
+        type: environment
+
+env:
+  WORKER_NAME: oidc-provider
+
+concurrency:
+  group: ${{ github.workflow }}-${{ inputs.environment || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment || github.ref_name }}
+      url: https://${{ (inputs.environment || vars.ENVIRONMENT) != 'production' && format('{0}.', (inputs.environment || vars.ENVIRONMENT)) || '' }}provider.oidc.cipher.chainfuse.com
+      # url: https://${{ (inputs.environment || vars.ENVIRONMENT) != 'production' && format('{0}.', (inputs.environment || vars.ENVIRONMENT)) || '' }}provider.oidc.cipher.autosec.network
+    steps:
+      - uses: step-security/harden-runner@v2.5.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+          disable-sudo: true
+      - uses: actions/checkout@v3.5.3
+        with:
+          submodules: true
+      - uses: actions/setup-node@v3.7.0
+        with:
+          node-version: lts/*
+          check-latest: true
+          cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            **/package-lock.json
+      - name: Install root deps
+        run: npm ci
+      - name: Install submodule deps
+        run: npm ci
+        working-directory: eaas-shared
+      - name: Install deps
+        run: npm ci
+        working-directory: ${{ env.WORKER_NAME }}
+      - uses: demosjarco/wrangler-action-node@v1.1.1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          workingDirectory: ${{ env.WORKER_NAME }}
+          vars: |
+            GIT_HASH
+        env:
+          GIT_HASH: ${{ github.sha }}
