@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: 'daily'
     open-pull-requests-limit: 999
-    target-branch: 'development'
+    target-branch: 'dev'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
@@ -25,7 +25,7 @@ updates:
     schedule:
       interval: 'daily'
     open-pull-requests-limit: 999
-    target-branch: 'development'
+    target-branch: 'dev'
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-patch']
@@ -43,7 +43,7 @@ updates:
     schedule:
       interval: 'daily'
     open-pull-requests-limit: 999
-    target-branch: 'development'
+    target-branch: 'dev'
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-patch']
