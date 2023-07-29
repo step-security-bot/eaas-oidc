@@ -67,6 +67,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_WRANGLER_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          environment: ${{ vars.ENVIRONMENT != 'canary' && vars.ENVIRONMENT || '' }}
           workingDirectory: ${{ env.WORKER_NAME }}
           vars: |
             GIT_HASH
