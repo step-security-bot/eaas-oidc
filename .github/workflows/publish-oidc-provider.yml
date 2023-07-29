@@ -66,7 +66,7 @@ jobs:
       - uses: demosjarco/wrangler-action-node@v1.1.1
         with:
           apiToken: ${{ secrets.CF_WRANGLER_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          accountId: ${{ secrets.CF_WRANGLER_ACCOUNT_ID }}
           environment: ${{ vars.ENVIRONMENT != 'canary' && vars.ENVIRONMENT || '' }}
           workingDirectory: ${{ env.WORKER_NAME }}
           vars: |
