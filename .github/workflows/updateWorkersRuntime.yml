@@ -49,6 +49,7 @@ jobs:
           MINOR_VERSION=${VERSION#*.}
           MINOR_VERSION_HYPHEN="${MINOR_VERSION:0:4}-${MINOR_VERSION:4:2}-${MINOR_VERSION:6:2}"
           echo "minor-version-hyphen=$MINOR_VERSION_HYPHEN" >> $GITHUB_OUTPUT
+      - run: echo "Writing compatibility_date = ${{ steps.get-version.outputs.minor-version-hyphen }}"
       - name: Update `compatibility_date` for canary branch
         if: github.base_ref == 'canary'
         run: find . -maxdepth 2 -name "wrangler.toml" -not -path "./eaas-shared/*" -print0 | xargs -0 sed -i "0,/compatibility_date = .*/s//compatibility_date = \"${{ steps.get-version.outputs.minor-version-hyphen }}\"/"
