@@ -39,7 +39,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: |
             package-lock.json
-            eaas-shared/package-lock.json
+            **/package-lock.json
       - run: npm ci
       # No need to run `npm ci` in submodule
       - name: Get minor version of workerd
