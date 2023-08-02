@@ -45,7 +45,7 @@ jobs:
       - name: Get minor version of workerd
         id: get-version
         run: |
-          VERSION=$(npm show workerd version)
+          VERSION=$(npm ls workerd --json | jq -r '.. | .workerd?.version? | select(.)')
           MINOR_VERSION=${VERSION#*.}
           MINOR_VERSION_HYPHEN="${MINOR_VERSION:0:4}-${MINOR_VERSION:4:2}-${MINOR_VERSION:6:2}"
           echo "minor-version-hyphen=$MINOR_VERSION_HYPHEN" >> $GITHUB_OUTPUT
