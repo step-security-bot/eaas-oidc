@@ -1,11 +1,7 @@
 name = "oidc-provider-canary"
 main = "src/index.ts"
-compatibility_date = "2023-07-24"
-compatibility_flags = [
-	"nodejs_compat",
-	"strict_compression_checks",
-	"strict_crypto_checks",
-]
+compatibility_date = "2023-08-01"
+compatibility_flags = ["nodejs_compat"]
 workers_dev = false
 # route = { pattern = "canary.provider.oidc.cipher.autosec.network", custom_domain = true }
 # ChainFuse is allowing us to use their enterprise CF account for free during dev
@@ -54,12 +50,8 @@ FETCH_MAX_REDIRECTS = "0"
 [env.staging]
 name = "oidc-provider-staging"
 main = "src/index.ts"
-compatibility_date = "2023-07-24"
-compatibility_flags = [
-	"nodejs_compat",
-	"strict_compression_checks",
-	"strict_crypto_checks",
-]
+compatibility_date = "2023-08-01"
+compatibility_flags = ["nodejs_compat"]
 workers_dev = false
 # route = { pattern = "staging.provider.oidc.cipher.autosec.network", custom_domain = true }
 route = { pattern = "staging.provider.oidc.cipher.chainfuse.ai", custom_domain = true }
@@ -78,12 +70,8 @@ FETCH_MAX_REDIRECTS = "0"
 [env.production]
 name = "oidc-provider"
 main = "src/index.ts"
-compatibility_date = "2023-07-24"
-compatibility_flags = [
-	"nodejs_compat",
-	"strict_compression_checks",
-	"strict_crypto_checks",
-]
+compatibility_date = "2023-08-01"
+compatibility_flags = ["nodejs_compat"]
 workers_dev = false
 # route = { pattern = "provider.oidc.cipher.autosec.network", custom_domain = true }
 route = { pattern = "provider.oidc.cipher.chainfuse.ai", custom_domain = true }
