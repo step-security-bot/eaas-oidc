@@ -8,6 +8,9 @@ on:
       - synchronize
     paths:
       - '**/package.json'
+  push:
+    paths:
+      - '.github/workflows/updateWorkersRuntime.yml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
@@ -15,7 +18,7 @@ concurrency:
 
 jobs:
   update-toml:
-    if: startsWith(github.event.pull_request.head.ref, 'dependabot/npm_and_yarn/dev/workerd') && github.actor == 'dependabot[bot]'
+    # if: startsWith(github.event.pull_request.head.ref, 'dependabot/npm_and_yarn/dev/workerd') && github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -58,4 +61,4 @@ jobs:
           git config user.email "dependabot[bot]@users.noreply.github.com"
       - run: find . -maxdepth 2 -name "wrangler.toml" -not -path "./eaas-shared/*" -print0 | xargs -0 git add
       - run: git commit -m "Update `compatibility_date` in `wrangler.toml` file"
-      - run: git push
+    #   - run: git push
