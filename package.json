@@ -26,6 +26,6 @@
 		"@demosjarco/prettier-config": "^1.0.0",
 		"prettier": "^3.0.0",
 		"typescript": "^5.1.6",
-		"wrangler": "^3.4.0"
+		"wrangler": "^3.6.0"
 	}
 }
