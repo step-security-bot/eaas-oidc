@@ -63,7 +63,7 @@ jobs:
       - name: Install deps
         run: npm ci
         working-directory: ${{ env.WORKER_NAME }}
-      - uses: demosjarco/wrangler-action-node@v1.1.1
+      - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_WRANGLER_API_TOKEN }}
           accountId: ${{ secrets.CF_WRANGLER_ACCOUNT_ID }}
