@@ -1,4 +1,8 @@
 {
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": true
+	},
 	"github-actions.workflows.pinned.workflows": [".github/workflows/publish-oidc-provider.yml"],
 	"github-actions.workflows.pinned.refresh.enabled": true
 }
