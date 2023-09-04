@@ -30,7 +30,7 @@ port = 8787
 [env.dev]
 name = "oidc-provider-dev"
 main = "src/index.ts"
-compatibility_date = "2023-08-01"
+compatibility_date = "2023-08-14"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = false
 # route = { pattern = "dev.provider.oidc.cipher.autosec.network", custom_domain = true }
