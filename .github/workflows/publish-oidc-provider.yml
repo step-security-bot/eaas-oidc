@@ -40,9 +40,10 @@ jobs:
       url: https://${{ (inputs.environment || vars.ENVIRONMENT) != 'production' && format('{0}.', (inputs.environment || vars.ENVIRONMENT)) || '' }}provider.oidc.cipher.chainfuse.ai
       # url: https://${{ (inputs.environment || vars.ENVIRONMENT) != 'production' && format('{0}.', (inputs.environment || vars.ENVIRONMENT)) || '' }}provider.oidc.cipher.autosec.network
     steps:
-      - uses: step-security/harden-runner@v1
+      - uses: step-security/harden-runner@v2.5.0
         with:
           egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+          disable-sudo: true
       - uses: actions/checkout@v3.5.3
         with:
           submodules: true
