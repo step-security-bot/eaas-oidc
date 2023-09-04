@@ -40,13 +40,13 @@ jobs:
       url: https://${{ (inputs.environment || vars.ENVIRONMENT) != 'production' && format('{0}.', (inputs.environment || vars.ENVIRONMENT)) || '' }}provider.oidc.cipher.chainfuse.ai
       # url: https://${{ (inputs.environment || vars.ENVIRONMENT) != 'production' && format('{0}.', (inputs.environment || vars.ENVIRONMENT)) || '' }}provider.oidc.cipher.autosec.network
     steps:
-      - uses: step-security/harden-runner@v1
+      - uses: step-security/harden-runner@2e205a28d0e1da00c5f53b161f4067b052c61f34 # v1.5.0
         with:
           egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
-      - uses: actions/checkout@v3.5.3
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
         with:
           submodules: true
-      - uses: actions/setup-node@v3.7.0
+      - uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3.7.0
         with:
           node-version: lts/*
           check-latest: true
@@ -62,7 +62,7 @@ jobs:
       - name: Install deps
         run: npm ci
         working-directory: ${{ env.WORKER_NAME }}
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@09fc6b504568cf179b085df24393f237fea6c7f6 # v3.1.1
         with:
           apiToken: ${{ secrets.CF_WRANGLER_API_TOKEN }}
           accountId: ${{ secrets.CF_WRANGLER_ACCOUNT_ID }}

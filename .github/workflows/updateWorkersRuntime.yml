@@ -13,6 +13,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   update-toml:
     if: startsWith(github.event.pull_request.head.ref, 'dependabot/npm_and_yarn/') && contains(github.event.pull_request.head.ref, '/wrangler') && github.actor == 'dependabot[bot]'
@@ -21,15 +24,15 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: step-security/harden-runner@v2.5.0
+      - uses: step-security/harden-runner@cba0d00b1fc9a034e1e642ea0f1103c282990604 # v2.5.0
         with:
           egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
           disable-sudo: true
-      - uses: actions/checkout@v3.5.3
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
         with:
           ref: ${{ github.head_ref }}
           submodules: true
-      - uses: actions/setup-node@v3.7.0
+      - uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3.7.0
         with:
           node-version: lts/*
           check-latest: true
