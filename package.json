@@ -19,7 +19,7 @@
 	"homepage": "https://github.com/autosec-network/eaas-oidc#readme",
 	"prettier": "@demosjarco/prettier-config",
 	"dependencies": {
-		"hono": "^3.3.4"
+		"hono": "^3.5.7"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20230801.0",
